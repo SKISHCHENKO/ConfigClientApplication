@@ -18,7 +18,14 @@ public class MessageController {
 
     @GetMapping("/message")
     public String getMessage() {
-        return "Активный профиль: " + activeProfile + "</br>"
-                + (appConfig.getMessage() != null ? appConfig.getMessage() : "Message not loaded!");
+        String profileMessage = (activeProfile != null && !activeProfile.isEmpty())
+                ? "Активный профиль: " + activeProfile
+                : "Активный профиль отсутствует!";
+
+        String message = (appConfig.getMessage() != null && !appConfig.getMessage().isEmpty())
+                ? appConfig.getMessage()
+                : "Default message!";
+
+        return profileMessage + "</br>" + message;
     }
 }
